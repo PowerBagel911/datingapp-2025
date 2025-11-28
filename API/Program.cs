@@ -17,7 +17,7 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 });
 builder.Services.AddCors();
 builder.Services.AddScoped<ITokenService, TokenService>(); // Register the TokenService for dependency injection
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme) // Middleware for authentication
     .AddJwtBearer(options =>
     {
         var tokenKey = builder.Configuration["TokenKey"] ?? throw new Exception("Token key not found - Program.cs");
