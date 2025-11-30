@@ -2,7 +2,7 @@ import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { inject } from '@angular/core';
 import { AccountService } from '../../core/services/account-service';
-import { RouterLink, RouterLinkActive } from "@angular/router";
+import { Router, RouterLink, RouterLinkActive } from "@angular/router";
 
 @Component({
   selector: 'app-nav',
@@ -12,12 +12,13 @@ import { RouterLink, RouterLinkActive } from "@angular/router";
 })
 export class Nav {
   protected accountService = inject(AccountService)
+  protected router = inject(Router);
   protected creds: any = {}
 
   login() {
     this.accountService.login(this.creds).subscribe({
       next: result => {
-        console.log(result);
+        this.router.navigateByUrl('/members');
         this.creds = {}; // Clear credentials after successful login
       },
       error: error => alert(error.message)
@@ -25,6 +26,7 @@ export class Nav {
   }
 
   logout() {
+    this.router.navigateByUrl('/');
     this.accountService.logout();
   }
 }
