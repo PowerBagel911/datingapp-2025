@@ -18,6 +18,7 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 });
 builder.Services.AddCors();
 builder.Services.AddScoped<ITokenService, TokenService>(); // Register the TokenService for dependency injection
+builder.Services.AddScoped<IMemberRepository, MemberRepository>(); // Register MemberRepository for dependency injection
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme) // Middleware for authentication
     .AddJwtBearer(options =>
     {
