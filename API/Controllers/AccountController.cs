@@ -31,7 +31,6 @@ public class AccountController(AppDbContext context, ITokenService tokenService)
             PasswordSalt = hmac.Key
         };
 
-        // store the user in the database
         context.Users.Add(user); // Step 1: Track the user
         await context.SaveChangesAsync(); // Step 2: Actually save to database
 
