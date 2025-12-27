@@ -13,7 +13,7 @@ namespace API.Controllers;
 
 public class AccountController(AppDbContext context, ITokenService tokenService) :  BaseAPIController
 {
-    [HttpPost("register")] // api/account/register
+    [HttpPost("register")]
     public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
     {
         if (await EmailExists(registerDto.Email)) // await keyword unwraps the Task<bool>
@@ -61,7 +61,6 @@ public class AccountController(AppDbContext context, ITokenService tokenService)
 
     private async Task<bool> EmailExists(string email)
     {
-    //  return await context.Users.AnyAsync(x => x.Email.Equals(email, StringComparison.CurrentCultureIgnoreCase)); // Not gonna work with entity framework
         return await context.Users.AnyAsync(x => x.Email.ToLower() == email.ToLower());
     }
 }
